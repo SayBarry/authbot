@@ -14,7 +14,7 @@ import threading
 from bs4 import BeautifulSoup
 stopuser = {}
 
-token = '7821261347:AAGKYtc2bBq5GODvvLsjcwouGj1ma7q9108'
+token = '7500695376:AAE67UrkRlrwYuID4gqBt6Xz9lpTTjVQWpc'
 
 bot=telebot.TeleBot(token,parse_mode="HTML")
 admin=6440962840 #id ta
